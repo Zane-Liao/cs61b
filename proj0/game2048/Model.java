@@ -5,7 +5,7 @@ import java.util.Observable;
 
 
 /** The state of a game of 2048.
- *  @author TODO: YOUR NAME HERE
+ *  @author TODO: Zane Liao
  */
 public class Model extends Observable {
     /** Current contents of the board. */
@@ -138,9 +138,9 @@ public class Model extends Observable {
      * */
     public static boolean emptySpaceExists(Board b) {
         // TODO: Fill in this function.
-        for (int row = 0; row <= b.size() - 1; row++){
-            for (int col = 0; col <= b.size() - 1; col++){
-                if (b.tile(col, row) == null) {
+        for (int row = 0; row <= b.size() - 1; row++) {
+            for (int col = 0; col <= b.size() - 1; col++) {
+                if (b.tile(row, col) == null) {
                     return true;
                 }
             }
@@ -154,11 +154,16 @@ public class Model extends Observable {
      * given a Tile object t, we get its value with t.value().
      */
     public static boolean maxTileExists(Board b) {
-        // TODO: Fill in this function.
-
-        if (int col == MAX_PIECE) {
-
+        // TODO: Fill in this function
+        for (int row = 0; row <= b.size() - 1; row++) {
+            for (int col = 0; col <= b.size() - 1; col++) {
+                Tile t = b.tile(row, col);
+                if (t != null && t.value() == MAX_PIECE) {
+                    return true;
+                }
+            }
         }
+
         return false;
     }
 
@@ -170,6 +175,26 @@ public class Model extends Observable {
      */
     public static boolean atLeastOneMoveExists(Board b) {
         // TODO: Fill in this function.
+        if (emptySpaceExists(b)) {
+            return true;
+        }
+        int rows = b.size();
+        int cols = b.size();
+
+        for (int row = 0; row <= b.size() - 1; row++) {
+            for (int col = 0; col <= b.size() - 1; col++) {
+                Tile t = b.tile(row, col);
+                if (t == null) {
+                        break;
+                    }
+                if ((row > 0 && b.tile(row - 1, col) != null && t.value() == b.tile(row - 1, col).value())||
+                        (row < rows - 1 && b.tile(row + 1, col) != null && t.value() == b.tile(row + 1, col).value())||
+                        (col > 0 && b.tile(row, col - 1) != null && t.value() == b.tile(row, col - 1).value())||
+                        (col < cols - 1 && b.tile(row, col + 1) != null && t.value() == b.tile(row, col + 1).value())) {
+                    return true;
+                    }
+                }
+            }
         return false;
     }
 
