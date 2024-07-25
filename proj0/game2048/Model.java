@@ -113,13 +113,41 @@ public class Model extends Observable {
         // TODO: Modify this.board (and perhaps this.score) to account
         // for the tilt to the Side SIDE. If the board changed, set the
         // changed local variable to true.
+        board.setViewingPerspective(side);
 
+        for (int col = 0; col < board.size(); col++) {
+            boolean colchanged = tiltColumnUp(col);
+            if (colchanged) {
+                changed = true;
+            }
+        }
+
+        board.setViewingPerspective(Side.NORTH);
         checkGameOver();
         if (changed) {
             setChanged();
         }
         return changed;
     }
+
+    private boolean tiltColumnUp(int col) {
+        boolean changed = false;
+        int targetRow = board.size() - 1;
+
+        for () {
+            if () {
+
+            }
+            if () {
+
+            } else if () {
+
+            } else {
+
+            }
+        }
+    }
+
 
     /** Checks if the game is over and sets the gameOver variable
      *  appropriately.
@@ -138,8 +166,8 @@ public class Model extends Observable {
      * */
     public static boolean emptySpaceExists(Board b) {
         // TODO: Fill in this function.
-        for (int row = 0; row <= b.size() - 1; row++) {
-            for (int col = 0; col <= b.size() - 1; col++) {
+        for (int row = 0; row < b.size(); row++) {
+            for (int col = 0; col < b.size(); col++) {
                 if (b.tile(row, col) == null) {
                     return true;
                 }
@@ -155,15 +183,14 @@ public class Model extends Observable {
      */
     public static boolean maxTileExists(Board b) {
         // TODO: Fill in this function
-        for (int row = 0; row <= b.size() - 1; row++) {
-            for (int col = 0; col <= b.size() - 1; col++) {
+        for (int row = 0; row < b.size(); row++) {
+            for (int col = 0; col < b.size(); col++) {
                 Tile t = b.tile(row, col);
                 if (t != null && t.value() == MAX_PIECE) {
                     return true;
                 }
             }
         }
-
         return false;
     }
 
@@ -181,8 +208,8 @@ public class Model extends Observable {
         int rows = b.size();
         int cols = b.size();
 
-        for (int row = 0; row <= b.size() - 1; row++) {
-            for (int col = 0; col <= b.size() - 1; col++) {
+        for (int row = 0; row < b.size(); row++) {
+            for (int col = 0; col < b.size(); col++) {
                 Tile t = b.tile(row, col);
                 if (t == null) {
                         break;
@@ -197,6 +224,8 @@ public class Model extends Observable {
             }
         return false;
     }
+
+
 
 
     @Override
