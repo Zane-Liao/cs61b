@@ -131,21 +131,36 @@ public class Model extends Observable {
     }
 
     private boolean tiltColumnUp(int col) {
-        boolean changed = false;
-        int targetRow = board.size() - 1;
+        boolean changed = false; // Mark whether any changes have occurred
+        int targetRow = board.size() - 1; // Target row, starting from the top
 
-        for () {
-            if () {
+        // Traverse each row from the second to last row upwards
+        for (int row = board.size() - 2; row >= 0; row--) {
+            Tile tile = board.tile(col, row); // Get the tile in the current row
+            if (tile == null) continue; // Skip this row if the tile is null
 
-            }
-            if () {
+            // Move the tile to the target position if it's empty
+            if (board.tile(col, targetRow) == null) {
+                board.move(col, targetRow, tile);
+                changed = true; // Mark that a change has occurred
 
-            } else if () {
+                // Merge the tile with the target position if they have the same value
+            } else if (board.tile(col, targetRow).value() == tile.value()) {
+                board.move(col, targetRow, tile); // Move and merge
+                score += board.tile(col, targetRow).value(); // Update score
+                targetRow--; // After merging, move the target row down by one
+                changed = true; // Mark that a change has occurred
 
+                // Otherwise, move the tile to the next target position
             } else {
-
+                targetRow--; // Update the target row
+                if (targetRow != row) { // Move only if the target row is not the current row
+                    board.move(col, targetRow, tile);
+                    changed = true; // Mark that a change has occurred
+                }
             }
         }
+        return changed; // Return whether a change has occurred
     }
 
 
