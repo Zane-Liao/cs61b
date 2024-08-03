@@ -1,34 +1,65 @@
 import java.util.LinkedList;
 
 public class LinkedListDeque<T> {
-    public class Node {
+    public static class Node<T> {
         public T item;
-        public Node next;
-        public Node prev;
-        public Node(T i, Node n, Node p) {
+        public Node<T> next;
+        public Node<T> prev;
+        public Node(Node<T> p, T i, Node<T> n) {
+            prev = p;
             item = i;
             next = n;
-            prev = p;
         }
     }
     private int size;
-    private Node sentinel;
+    private Node<T> sentFront;
+    private Node<T> sentBack;
     private T t;
 
     public LinkedListDeque() {
-        size = 1;
-        sentinel = new Node(null,null, null);
+        sentFront = new Node<T>(null, null, null);
+        sentBack = new Node<T>(null, null, null);
+        sentFront.next = sentBack;
+        sentBack.prev = sentFront;
+        size = 0;
     }
 
     public void addFirst(T item) {
-
+        Node<T> newnode = new Node<T>(sentFront, item, sentFront.next);
+        sentFront.next.prev = newnode;
+        sentFront.next = newnode;
+        size += 1;
     }
-    public void addLast(T item) {}
-    public boolean isEmpty() {}
-    public int size() {}
+
+    public void addLast(T item) {
+        Node<T> newnode = new Node<T>(sentBack, item, sentBack.prev);
+        sentBack.prev.next = newnode;
+        sentBack.prev = newnode;
+        size += 1;
+    }
+    public boolean isEmpty() {
+        return size == 0;
+    }
+    public int size() {
+        return size;
+    }
     public void printDeque() {}
-    public T removeFirst() {}
-    public T removeLast() {}
+    public T removeFirst() {
+        Node<T> first = sentFront.next;
+        T item = first.item;
+        sentFront.next = sentFront;
+        first.prev.next = sentFront;
+        size -= 1;
+        return item;
+    }
+    public T removeLast() {
+        Node<T> last = sentBack.prev;
+        T item = last.item;
+        sentBack.prev = sentBack;
+        last.next.prev = sentBack;
+        size -= 1;
+        return item;
+    }
     public T get(int index) {}
     public T getRecursive(int index) {}
 }
