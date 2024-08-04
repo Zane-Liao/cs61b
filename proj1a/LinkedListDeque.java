@@ -60,6 +60,19 @@ public class LinkedListDeque<T> {
         size -= 1;
         return item;
     }
-    public T get(int index) {}
-    public T getRecursive(int index) {}
+    public T get(int index) {
+        Node<T> first = sentFront.next;
+        for (int i = 0; i < index; i++) {
+            first = first.next;
+            i++;
+        }
+        return first.item;
+    }
+    public T getRecursive(int index) {
+        Node<T> first = sentFront.next;
+        if (first == null) {
+            return first.item;
+        }
+        return getRecursive(index - 1);
+    }
 }
