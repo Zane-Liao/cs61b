@@ -1,4 +1,4 @@
-// TODO: Make sure to make this class a part of the synthesizer package
+package synthesizer;// TODO: Make sure to make this class a part of the synthesizer package
 // package <package name>;
 import java.util.Iterator;
 
@@ -33,7 +33,7 @@ public class ArrayRingBuffer<T>  {
     }
 
     /**
-     * Dequeue oldest item in the ring buffer. If the buffer is empty, then
+     * Dequeue the oldest item in the ring buffer. If the buffer is empty, then
      * throw new RuntimeException("Ring buffer underflow"). Exceptions
      * covered Monday.
      */
@@ -42,7 +42,7 @@ public class ArrayRingBuffer<T>  {
     }
 
     /**
-     * Return oldest item, but don't remove it.
+     * Return the oldest item, but don't remove it.
      */
     public T peek() {
         // TODO: Return the first item. None of your instance variables should change.
