@@ -631,48 +631,9 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="应用程序.TestComplexOomage">
-    <configuration name="ComplexOomage" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="hw3.hash.ComplexOomage" />
-      <module name="hw3" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="hw3.hash.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="HashTableVisualizer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="hw3.hash.HashTableVisualizer" />
-      <module name="hw3" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="hw3.hash.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="应用程序.TestSimpleOomage">
     <configuration name="SimpleOomage" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="hw3.hash.SimpleOomage" />
-      <module name="hw3" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="hw3.hash.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TestComplexOomage" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="hw3.hash.TestComplexOomage" />
       <module name="hw3" />
       <extension name="coverage">
         <pattern>
@@ -699,11 +660,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="应用程序.TestComplexOomage" />
-        <item itemvalue="应用程序.ComplexOomage" />
-        <item itemvalue="应用程序.HashTableVisualizer" />
-        <item itemvalue="应用程序.SimpleOomage" />
         <item itemvalue="应用程序.TestSimpleOomage" />
+        <item itemvalue="应用程序.SimpleOomage" />
       </list>
     </recent_temporary>
   </component>
@@ -718,7 +676,7 @@
       <workItem from="1724333984893" duration="32000" />
       <workItem from="1726745683501" duration="71000" />
       <workItem from="1726877992833" duration="1384000" />
-      <workItem from="1726879410425" duration="7732000" />
+      <workItem from="1726879410425" duration="819000" />
     </task>
     <servers />
   </component>
