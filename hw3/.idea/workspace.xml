@@ -92,6 +92,13 @@
       <change beforePath="$PROJECT_DIR$/hw3/hash/TestJankyOomage.java" beforeDir="false" afterPath="$PROJECT_DIR$/hw3/hash/TestJankyOomage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hw3/hash/TestNiceSpreadOomage.java" beforeDir="false" afterPath="$PROJECT_DIR$/hw3/hash/TestNiceSpreadOomage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hw3/hash/TestSimpleOomage.java" beforeDir="false" afterPath="$PROJECT_DIR$/hw3/hash/TestSimpleOomage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/hw3/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hw3/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/hw3/.idea/libraries/javalib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hw3/.idea/libraries/javalib.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/hw3/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hw3/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/hw3/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hw3/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/hw3/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hw3/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/hw3/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hw3/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/hw3/hw3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hw3/hw3.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../hw4/.idea/libraries/javalib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../hw4/.idea/libraries/javalib.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../hw4/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../hw4/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../hw4/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../hw4/.idea/modules.xml" afterDir="false" />
@@ -718,7 +725,9 @@
       <workItem from="1724333984893" duration="32000" />
       <workItem from="1726745683501" duration="71000" />
       <workItem from="1726877992833" duration="1384000" />
-      <workItem from="1726879410425" duration="7732000" />
+      <workItem from="1726879410425" duration="8913000" />
+      <workItem from="1726969197943" duration="88000" />
+      <workItem from="1726988621321" duration="7000" />
     </task>
     <servers />
   </component>

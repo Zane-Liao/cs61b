@@ -1,5 +1,6 @@
 import org.junit.Test;
 import static org.junit.Assert.*;
+import java.util.PriorityQueue;
 
 /**
  * A Generic heap class. Unlike Java's priority queue, this heap doesn't just
@@ -28,7 +29,7 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
      */
     private static int leftIndex(int i) {
         /* TODO: Your code here! */
-        return 0;
+        return i*2;
     }
 
     /**
@@ -36,7 +37,7 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
      */
     private static int rightIndex(int i) {
         /* TODO: Your code here! */
-        return 0;
+        return i*2+1;
     }
 
     /**
@@ -44,7 +45,7 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
      */
     private static int parentIndex(int i) {
         /* TODO: Your code here! */
-        return 0;
+        return i/2;
     }
 
     /**
