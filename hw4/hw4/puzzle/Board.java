@@ -4,7 +4,7 @@ public class Board {
 
     /** Returns the string representation of the board. 
       * Uncomment this method. */
-    /*public String toString() {
+    public String toString() {
         StringBuilder s = new StringBuilder();
         int N = size();
         s.append(N + "\n");
@@ -16,6 +16,6 @@ public class Board {
         }
         s.append("\n");
         return s.toString();
-    }*/
+    }
 
 }
