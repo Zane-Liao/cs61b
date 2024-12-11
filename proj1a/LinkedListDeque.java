@@ -1,5 +1,3 @@
-import java.util.LinkedList;
-
 public class LinkedListDeque<T> {
     public static class Node<T> {
         public T item;
@@ -43,7 +41,14 @@ public class LinkedListDeque<T> {
     public int size() {
         return size;
     }
-    public void printDeque() {}
+    public void printDeque() {
+        Node<T> first = sentFront.next;
+        for (int i = 0; i < size; i++) {
+            System.out.print(first.item + " ");
+            first = first.next;
+        }
+        System.out.println();
+    }
     public T removeFirst() {
         Node<T> first = sentFront.next;
         T item = first.item;
