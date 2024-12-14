@@ -34,9 +34,15 @@ public class MergeSort {
     /** Returns a queue of queues that each contain one item from items. */
     private static <Item extends Comparable> Queue<Queue<Item>>
             makeSingleItemQueues(Queue<Item> items) {
-        // Your code here!
-        return null;
+        Queue<Queue<Item>> queues = new Queue<>();  // My solution does not use method
+        for (Item element: items) {
+            Queue<Item> queue = new Queue<>();
+            queue.enqueue(element);
+            queues.enqueue(queue);
+        }
+        return queues;
     }
+
 
     /**
      * Returns a new queue that contains the items in q1 and q2 in sorted order.
@@ -53,14 +59,40 @@ public class MergeSort {
      */
     private static <Item extends Comparable> Queue<Item> mergeSortedQueues(
             Queue<Item> q1, Queue<Item> q2) {
-        // Your code here!
-        return null;
+        Queue<Item> sortQueue = new Queue<>();
+        while (!(q1.isEmpty() && q2.isEmpty())) {
+            sortQueue.enqueue(getMin(q1, q2));
+        }
+        return sortQueue;
     }
 
     /** Returns a Queue that contains the given items sorted from least to greatest. */
     public static <Item extends Comparable> Queue<Item> mergeSort(
             Queue<Item> items) {
-        // Your code here!
-        return items;
+        int n = items.size();   // My solution does use stanford cs161 lecture2-notes.
+        Queue<Item> left = new Queue<>();
+        Queue<Item> right = new Queue<>();
+        if (n <= 1) return items;
+        for (int i = 0; i < n / 2; i += 1) {
+            left.enqueue(items.dequeue());
+        }
+        while (!items.isEmpty()) {
+            right.enqueue(items.dequeue());
+        }
+        Queue<Item> L = mergeSort(left);
+        Queue<Item> R= mergeSort(right);
+        return mergeSortedQueues(L, R);
+    }
+    public static void main(String args[]) {
+        Queue<String> students = new Queue<String>();
+        students.enqueue("David");
+        students.enqueue("Alice");
+        students.enqueue("Zane");
+        students.enqueue("Vanessa");
+        students.enqueue("Ethan");
+        System.out.print("Before: " + students + " ");
+        System.out.println();
+        System.out.print("MergeSort: " + MergeSort.mergeSort(students) + " ");
+        System.out.println();
     }
 }
