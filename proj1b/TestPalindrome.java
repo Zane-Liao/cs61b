@@ -27,4 +27,12 @@ public class TestPalindrome {
         assertFalse(palindrome.isPalindrome("cats"));
         assertFalse(palindrome.isPalindrome("cbhgdhbc"));
     }
+
+    @Test
+    public void testOffByOneIsPalindrome() {
+        CharacterComparator cc = new OffByOne();
+        assertFalse(palindrome.isPalindrome("gork", cc));
+        assertTrue(palindrome.isPalindrome("noon", cc));
+        assertFalse(palindrome.isPalindrome("dcbyweuvcgwegh", cc));
+    }
 }

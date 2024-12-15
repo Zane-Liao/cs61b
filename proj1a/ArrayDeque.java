@@ -1,9 +1,10 @@
-public class ArrayDeque<V> {
+import java.util.NoSuchElementException;
+public class ArrayDeque<T> {
     /** ArrayDeque is not LinkedList. */
     private int size;
     private int nextFirst;
     private int nextLast;
-    private V[] items;
+    private T[] items;
 
     private static final int RFCTOR = 2;
 
@@ -11,22 +12,24 @@ public class ArrayDeque<V> {
      *  a[-1] -> a = [1, 2, 3, 4] -> [4] */
     public ArrayDeque() {
         size = 0;
-        items = (V[]) new Object[8];
-        nextFirst = 0;
-        nextLast = 0;
+        items = (T[]) new Object[8];
+        nextFirst = items.length / 2;
+        nextLast = items.length / 2;
     }
-    public void addFirst(V item) {
+    public void addFirst(T item) {
+        if ((nextFirst == 0) && (!isFull())) nextFirst = items.length;
         items[nextFirst] = item;
-        nextFirst += (nextFirst - 1 + items.length) % items.length;
+        nextFirst -= 1;
         size += 1;
     }
-    public void addLast(V item) {
+    public void addLast(T item) {
+        if ((nextLast == items.length) && (!isFull())) nextLast = 0;
+        nextLast += 1;
+        items[nextLast] = item;
+        size += 1;
         if (isFull()) {
             resize(size*RFCTOR);
         }
-        nextLast += (nextLast + 1) % items.length;
-        items[nextLast] = item;
-        size += 1;
     }
     public boolean isEmpty() {
         return size == 0;
@@ -37,40 +40,45 @@ public class ArrayDeque<V> {
     public int size() {
         return size;
     }
-    public V printDeque() {
+    public void printDeque() {
         for (int i = 0; i < items.length; i++) {
             if (items[i] != null) {
                 System.out.print(items[i] + " ");
             }
         }
         System.out.println();
-        return null;
     }
-    public V removeFirst() {
-        if (items.length / size >= 4 || items.length > 16) {
-            resize(items.length / 4);
-        }
-        items[size - 1] = null;
-        nextFirst -= (nextFirst + 1) % items.length;
+    public T removeFirst() {
+        if (isEmpty()) throw new NoSuchElementException("Deque is empty");
+        if (nextFirst == items.length) nextFirst = 0;
+        T item = items[nextFirst];
+        items[nextFirst] = null;
+        nextFirst += 1;
         size -= 1;
-        return null;
+        return item;
     }
-    public V removeLast() {
-        items[size - 1] = null;
-        nextLast -= (nextLast - 1 + items.length) % items.length;
+    public T removeLast() {
+        if (isEmpty()) throw new NoSuchElementException("Deque is empty");;
+        if (nextLast == 0) nextLast = items.length;
+        nextLast -= 1;
+        T item = items[nextLast];
+        items[nextLast] = null;
         size -= 1;
-        return null;
+        return item;
     }
-    public V get(int index) {
+    public T get(int index) {
         return items[calIndex(index)];
     }
     public int calIndex(int index) {
         int calIndex = (nextFirst + index) % items.length;
         return calIndex;
     }
+    /** For example: [1, 2, 3, 4] -> [1, 2, null, null, null, null, 3, 4] */
     public void resize(int initialCapacity) {
-        V[] a = (V[]) new Object[initialCapacity];
-        System.arraycopy(items, 0, a, 0, size);
+        T[] a = (T[]) new Object[initialCapacity];
+        int firstPartLength = items.length - nextFirst;
+        System.arraycopy(items, nextFirst, a, 0, firstPartLength); // arraycopy
+        System.arraycopy(items, 0, a, firstPartLength, nextLast);
         nextFirst = 0;
         nextLast = size;
         items = a;

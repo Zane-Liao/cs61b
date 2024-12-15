@@ -1,3 +1,4 @@
+import java.util.NoSuchElementException;
 public class ArrayDeque<Item> implements Deque<Item> {
     /** ArrayDeque is not LinkedList. */
     private int size;
@@ -12,26 +13,25 @@ public class ArrayDeque<Item> implements Deque<Item> {
     public ArrayDeque() {
         size = 0;
         items = (Item[]) new Object[8];
-        nextFirst = 0;
-        nextLast = 0;
+        nextFirst = items.length / 2;
+        nextLast = items.length / 2;
     }
     @Override
     public void addFirst(Item item) {
-        if (isFull()) {
-            resize(size*RFCTOR);
-        }
+        if ((nextFirst == 0) && (!isFull())) nextFirst = items.length;
         items[nextFirst] = item;
-        nextFirst += (nextFirst - 1 + items.length) % items.length;
+        nextFirst -= 1;
         size += 1;
     }
     @Override
     public void addLast(Item item) {
+        if ((nextLast == items.length) && (!isFull())) nextLast = 0;
+        items[nextLast] = item;
+        nextLast += 1;
+        size += 1;
         if (isFull()) {
             resize(size*RFCTOR);
         }
-        nextLast += (nextLast + 1) % items.length;
-        items[nextLast] = item;
-        size += 1;
     }
     @Override
     public boolean isEmpty() {
@@ -55,20 +55,23 @@ public class ArrayDeque<Item> implements Deque<Item> {
     }
     @Override
     public Item removeFirst() {
-        if (items.length / size >= 4 || items.length > 16) {
-            resize(items.length / 4);
-        }
-        items[size - 1] = null;
-        nextFirst -= (nextFirst + 1) % items.length;
+        if (isEmpty()) throw new NoSuchElementException("Deque is empty");
+        if (nextFirst == items.length) nextFirst = 0;
+        Item item = items[nextFirst];
+        items[nextFirst] = null;
+        nextFirst += 1;
         size -= 1;
-        return null;
+        return item;
     }
     @Override
     public Item removeLast() {
-        items[size - 1] = null;
-        nextLast -= (nextLast - 1 + items.length) % items.length;
+        if (isEmpty()) throw new NoSuchElementException("Deque is empty");;
+        if (nextLast == 0) nextLast = items.length;
+        nextLast -= 1;
+        Item item = items[nextLast];
+        items[nextLast] = null;
         size -= 1;
-        return null;
+        return item;
     }
     @Override
     public Item get(int index) {
@@ -78,9 +81,12 @@ public class ArrayDeque<Item> implements Deque<Item> {
         int calIndex = (nextFirst + index) % items.length;
         return calIndex;
     }
+    /** For example: [1, 2, 3, 4] -> [1, 2, null, null, null, null, 3, 4] */
     public void resize(int initialCapacity) {
         Item[] a = (Item[]) new Object[initialCapacity];
-        System.arraycopy(items, 0, a, 0, size);
+        int firstPartLength = items.length - nextFirst;
+        System.arraycopy(items, nextFirst, a, 0, firstPartLength); // arraycopy
+        System.arraycopy(items, 0, a, firstPartLength, nextLast);
         nextFirst = 0;
         nextLast = size;
         items = a;
