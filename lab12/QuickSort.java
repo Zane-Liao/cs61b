@@ -48,12 +48,49 @@ public class QuickSort {
             Queue<Item> unsorted, Item pivot,
             Queue<Item> less, Queue<Item> equal, Queue<Item> greater) {
         // Your code here!
+        for (Item sorted: unsorted) {
+            if (pivot.compareTo(sorted) > 0) { // (pivot and sorted) > 0, pivot > sorted -> less
+                less.enqueue(sorted);
+            } else if (pivot.compareTo(sorted) < 0) { // (pivot and sorted) < 0, pivot < sorted -> greater
+                greater.enqueue(sorted);
+            } else {
+                equal.enqueue(sorted);
+            }
+        }
     }
 
     /** Returns a Queue that contains the given items sorted from least to greatest. */
     public static <Item extends Comparable> Queue<Item> quickSort(
             Queue<Item> items) {
         // Your code here!
-        return items;
+        int n = items.size();
+        if (n <= 1) return items;
+        Item pivot = getRandomItem(items);
+        Queue<Item> less = new Queue<>();
+        Queue<Item> equal = new Queue<>();
+        Queue<Item> greater = new Queue<>();
+        partition(items, pivot, less, equal, greater);
+        if (!less.isEmpty()) less = quickSort(less); // use recurse update less and greater
+        if (!greater.isEmpty()) greater = quickSort(greater);
+        Queue<Item> almostHalf = catenate(less, equal);
+        Queue<Item> results = catenate(almostHalf, greater);
+        return results;
+    }
+    public static void main(String args[]) {
+        Queue<Integer> studentNumbers = new Queue<>();
+        studentNumbers.enqueue(-367);
+        studentNumbers.enqueue(5);
+        studentNumbers.enqueue(79);
+        studentNumbers.enqueue(4623746);
+        studentNumbers.enqueue(-6875875);
+        studentNumbers.enqueue(1024);
+        studentNumbers.enqueue(1);
+        studentNumbers.enqueue(87);
+        studentNumbers.enqueue(99);
+        studentNumbers.enqueue(-78);
+        System.out.print("Before: " + studentNumbers + " ");
+        System.out.println();
+        System.out.print("QuickSort: " + QuickSort.quickSort(studentNumbers) + " ");
+        System.out.println();
     }
 }
