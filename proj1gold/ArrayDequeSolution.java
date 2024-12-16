@@ -1,5 +1,5 @@
 import java.util.LinkedList;
-
+import java.util.ArrayDeque;
 /**
  * Isn't this solution kinda... cheating? Yes.
  * The aesthete will be especially alarmed by the fact that this
