@@ -3,16 +3,24 @@ import edu.princeton.cs.algs4.MinPQ;
 
 public class Solver implements WorldState {
 
+    private class SearchNode {
+        private SearchNode point;
+        private WorldState state;
+        private int move;
+
+        private SearchNode(SearchNode p, int m, WorldState s) {
+            point = p;
+            move = m;
+            state = s;
+        }
+    }
+
     /**
      * */
     public Solver(WorldState initial) {
         MinPQ state_steps = new MinPQ();
         state_steps.insert(0);
         isGoal();
-    }
-
-    private class SearchNode {
-        
     }
 
     /**

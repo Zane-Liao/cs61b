@@ -114,7 +114,7 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
             swap(index, parentIndex(index));
             swim(parentIndex(index));
         }
-    }
+    } // Error
 
     /**
      * Bubbles down the node currently at the given index.
@@ -135,7 +135,7 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
             swap(index, rightIndex(index));
             swim(rightIndex(index));
         }
-    }
+    } // Error
 
     /**
      * Inserts an item with the given priority value. This is enqueue, or offer.
@@ -149,7 +149,7 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         }
         contents[size] = (Node) item;
         swim(size);
-    }
+    } // Error
 
     /**
      * Returns the Node with the smallest priority value, but does not remove it
