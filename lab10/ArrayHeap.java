@@ -80,7 +80,6 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         contents[index2] = node1;
     }
 
-
     /**
      * Returns the index of the node with smaller priority. Precondition: not
      * both nodes are null.
@@ -99,22 +98,22 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         }
     }
 
-
     /**
      * Bubbles up the node currently at the given index.
      */
     private void swim(int index) {
         // Throws an exception if index is invalid. DON'T CHANGE THIS LINE.
         validateSinkSwimArg(index);
-        Node node1 = getNode(index);
-        Node node2 = getNode(index);
-        contents[index] = node1;
-        contents[parentIndex(index)] = node2;
-        if (Objects.requireNonNull(node1).myPriority < Objects.requireNonNull(node2).myPriority) {
-            swap(index, parentIndex(index));
-            swim(parentIndex(index));
+        while (index > 1) {
+            int parent = parentIndex(index);
+            if (contents[index].myPriority < contents[parent].myPriority) {
+                swap(index, parent);
+                index = parent;
+            } else {
+                break;
+            }
         }
-    } // Error
+    }
 
     /**
      * Bubbles down the node currently at the given index.
@@ -122,20 +121,19 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
     private void sink(int index) {
         // Throws an exception if index is invalid. DON'T CHANGE THIS LINE.
         validateSinkSwimArg(index);
-        Node node1 = getNode(index);
-        Node node2 = getNode(index);
-        Node node3 = getNode(index);
-        contents[index] = node1;
-        contents[leftIndex(index)] = node2;
-        contents[rightIndex(index)] = node3;
-        if (Objects.requireNonNull(node1).myPriority > Objects.requireNonNull(node2).myPriority) {
-            swap(index, leftIndex(index));
-            swim(leftIndex(index));
-        } else if (node1.myPriority > Objects.requireNonNull(node3).myPriority) {
-            swap(index, rightIndex(index));
-            swim(rightIndex(index));
+        while (leftIndex(index) <= size) {
+            int smallerChild = leftIndex(index);
+            if (rightIndex(index) <= size && contents[rightIndex(index)].myPriority < contents[leftIndex(index)].myPriority) {
+                smallerChild = rightIndex(index);
+            }
+            if (contents[smallerChild].myPriority < contents[index].myPriority) {
+                swap(smallerChild, index);
+                index = smallerChild;
+            } else {
+                break;
+            }
         }
-    } // Error
+    }
 
     /**
      * Inserts an item with the given priority value. This is enqueue, or offer.
@@ -147,9 +145,11 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         if (size + 1 == contents.length) {
             resize(contents.length * 2);
         }
-        contents[size] = (Node) item;
+        Node newNode = new Node(item, priority);
+        contents[size + 1] = newNode;
+        size++;
         swim(size);
-    } // Error
+    }
 
     /**
      * Returns the Node with the smallest priority value, but does not remove it
@@ -157,7 +157,8 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
      */
     @Override
     public T peek() {
-        return (T) contents[1];
+        if (size == 0) throw new IllegalArgumentException();
+        return contents[1].myItem;
     }
 
     /**
@@ -171,11 +172,13 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
      */
     @Override
     public T removeMin() {
+        if (size == 0) throw new IllegalArgumentException();
         Node min = contents[1];
-        swap(1, size--);
-        contents[1+size] = null;
+        swap(1, size);
+        contents[size] = null;
+        size--;
         sink(1);
-        return null;
+        return min.myItem;
     }
 
     /**
@@ -197,9 +200,12 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
      */
     @Override
     public void changePriority(T item, double priority) {
-        contents[size] = (Node) item;
-        return;
-    }
+//        for (int i = 0; i < size; i++) {
+//            if (contents[i].myItem.equals(item)) {
+//
+//            }
+//        }
+    } // Error
 
     /**
      * Prints out the heap sideways. Provided for you.

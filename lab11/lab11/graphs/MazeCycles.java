@@ -11,36 +11,40 @@ public class MazeCycles extends MazeExplorer {
 //    public int[] edgeTo;
 //    public boolean[] marked;
 
-
-    private boolean targetFound;
+    private Maze maze;
+    private int[] nodeTo;
+    private boolean isFound = false;
 
     public MazeCycles(Maze m) {
         super(m);
+        maze = m;
+        nodeTo = new int[maze.N() * maze.N()];
     }
 
     @Override
     public void solve() {
         // TODO: Your code here!
-        dfsCycle(0, 1);
+        dfs(0, 1);
+
     }
-    // Helper methods go here
-    // Unfinished
-    public void dfsCycle(int parentNode, int v) {
+    // Other people's solutions
+    private void dfs(int u, int v) {
         marked[v] = true;
         announce();
         for (int w : maze.adj(v)) {
             if (!marked[w]) {
-                announce();
-                dfsCycle(v, w);
-            } else if (w != parentNode) {
+                nodeTo[w] = v;
+                dfs(v, w);
+            } else if (w != u) {
                 edgeTo[w] = v;
                 announce();
-//                if (marked[w] && edgeTo[w] != v) {
-//                    edgeTo[w] = v;
-//                    announce();
-//                }
-                return;
+                for (int x = v; x != w; x = nodeTo[x]) {
+                    edgeTo[x] = nodeTo[x];
+                    announce();
+                }
+                isFound = true;
             }
+            if (isFound) return;
         }
     }
 }
