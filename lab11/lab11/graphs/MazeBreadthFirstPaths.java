@@ -29,13 +29,13 @@ public class MazeBreadthFirstPaths extends MazeExplorer {
     /** Conducts a breadth first search of the maze starting at the source. */
     private void bfs(int v) {
         // TODO: Your code here. Don't forget to update distTo, edgeTo, and marked, as well as call announce()
-        ArrayDeque<Integer> demarked = new ArrayDeque<>();
-        demarked.add(v);
+        ArrayDeque<Integer> remarked = new ArrayDeque<>();
+        remarked.add(v);
         marked[v] = true;
         announce();
 
-        while (!demarked.isEmpty()) {
-            int current = demarked.remove();
+        while (!remarked.isEmpty()) {
+            int current = remarked.remove();
 
             if (current == t) {
                 targetFound = true;
@@ -43,7 +43,7 @@ public class MazeBreadthFirstPaths extends MazeExplorer {
 
             for (int w : maze.adj(current)) {
                 if (!marked[w]) {
-                    demarked.add(w);
+                    remarked.add(w);
                     marked[w] = true;
                     announce();
                     edgeTo[w] = current;

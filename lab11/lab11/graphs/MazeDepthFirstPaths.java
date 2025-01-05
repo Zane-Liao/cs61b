@@ -1,4 +1,5 @@
 package lab11.graphs;
+import edu.princeton.cs.algs4.Stack;
 
 /**
  *  @author Josh Hug
@@ -25,25 +26,25 @@ public class MazeDepthFirstPaths extends MazeExplorer {
     }
 
     private void dfs(int v) {
+        Stack<Integer> remarked = new Stack<>();
+        remarked.push(v);
         marked[v] = true;
         announce();
 
-        if (v == t) {
-            targetFound = true;
-        }
+        while (!remarked.isEmpty()) {
+            int current = remarked.pop();
 
-        if (targetFound) {
-            return;
-        }
+            if (current == t) {
+                targetFound = true;
+            }
 
-        for (int w : maze.adj(v)) {
-            if (!marked[w]) {
-                edgeTo[w] = v;
-                announce();
-                distTo[w] = distTo[v] + 1;
-                dfs(w);
-                if (targetFound) {
-                    return;
+            for (int w : maze.adj(current)) {
+                if (!marked[w]) {
+                    remarked.push(w);
+                    announce();
+                    distTo[w] = distTo[current] + 1;
+                    edgeTo[w] = v;
+                    dfs(w);
                 }
             }
         }
